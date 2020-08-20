@@ -4,6 +4,7 @@ import React from 'react';
 
 function Login() {
   return (
+  <>
     <div className="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
@@ -36,6 +37,7 @@ function Login() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

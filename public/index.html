@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <!-- <link rel="icon" href="../src/Assets/icones/favicon.ico" /> -->
+    <!-- <link rel="shortcut icon" href="../src/Assets/icones/favicon.ico" type="image/x-icon" /> -->
+    <link rel="shortcut icon" href="../src/Assets/icones/favicon.png" type="image/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -24,20 +27,84 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>..::VS Dicas::..</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <!-- <noscript>You need to enable JavaScript to run this app.</noscript>    -->
+  <div id="root"></div>    
+  <!-- <div class="homepage-hero-module">
+    <div class="video-container">
+      <div class="filter">
+      </div>
+      <video autoplay loop muted playsinline src="./assetsHome/fundoSitemp4.mp4" class="fillWidth">
+      </video>
+    </div>
+  </div> -->
+    
+  <!-- JQuery first, popper js, and bootstrap last -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script>
+      
+  // jQuery is required to run this code
+  $( document ).ready(function() {
+    scaleVideoContainer();
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    initBannerVideoSize('.video-container .poster img');
+    initBannerVideoSize('.video-container .filter');
+    initBannerVideoSize('.video-container video');
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    $(window).on('resize', function() {
+      scaleVideoContainer();
+      scaleBannerVideoSize('.video-container .poster img');
+      scaleBannerVideoSize('.video-container .filter');
+      scaleBannerVideoSize('.video-container video');
+    });
+  });
+
+  function scaleVideoContainer() {
+    var height = $(window).height() + 5;
+    var unitHeight = parseInt(height) + 'px';
+    $('.homepage-hero-module').css('height',unitHeight);
+  }
+
+  function initBannerVideoSize(element){
+    $(element).each(function(){
+      $(this).data('height', $(this).height());
+      $(this).data('width', $(this).width());
+    });
+
+    scaleBannerVideoSize(element);
+  }
+
+  function scaleBannerVideoSize(element) {
+
+    var windowWidth = $(window).width(),
+    windowHeight = $(window).height() + 5,
+    videoWidth,
+    videoHeight;
+
+    // console.log(windowHeight);
+
+    $(element).each(function(){
+      var videoAspectRatio = $(this).data('height')/$(this).data('width');
+
+      $(this).width(windowWidth);
+
+      if(windowWidth < 1000){
+          videoHeight = windowHeight;
+          videoWidth = videoHeight / videoAspectRatio;
+          $(this).css({'margin-top' : 0, 'margin-left' : -(videoWidth - windowWidth) / 2 + 'px'});
+
+          $(this).width(videoWidth).height(videoHeight);
+      }
+
+      $('.homepage-hero-module .video-container video').addClass('fadeIn animated');
+
+    });
+  }
+
+    </script>
   </body>
 </html>
